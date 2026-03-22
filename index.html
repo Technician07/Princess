@@ -3,12 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Somika's Journey | Mrtechnician</title>
-    
+    <title>The Journey of Somika | Mrtechnician</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
-
     <style>
         :root {
             --primary-teal: #2dd4bf;
@@ -16,52 +13,45 @@
             --accent-gold: #fbbf24;
             --glass: rgba(255, 255, 255, 0.03);
             --glass-border: rgba(255, 255, 255, 0.08);
-            --text-main: #f8fafc;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
-        body { background-color: var(--deep-bg); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.7; }
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { background-color: var(--deep-bg); color: #f8fafc; font-family: 'Inter', sans-serif; overflow: hidden; height: 100vh; }
 
-        .orb { position: fixed; border-radius: 50%; filter: blur(100px); z-index: -1; opacity: 0.2; }
-        .orb-1 { width: 500px; height: 500px; background: var(--primary-teal); top: -10%; left: -10%; }
-        .orb-2 { width: 600px; height: 600px; background: #4f46e5; bottom: -10%; right: -10%; }
+        /* Background Glows */
+        .orb { position: fixed; border-radius: 50%; filter: blur(100px); z-index: -1; opacity: 0.2; animation: float 20s infinite alternate; }
+        .orb-1 { width: 400px; height: 400px; background: var(--primary-teal); top: -10%; left: -10%; }
+        .orb-2 { width: 500px; height: 500px; background: #4f46e5; bottom: -10%; right: -10%; }
+        @keyframes float { from { transform: translate(0,0); } to { transform: translate(50px, 50px); } }
 
-        .section { min-height: 100vh; width: 100%; display: none; padding: 40px 20px; position: relative; }
-        .active { display: block; }
-        .container { max-width: 800px; margin: 0 auto; padding-bottom: 100px; }
+        /* Page Structure */
+        .page { position: absolute; width: 100%; height: 100vh; display: none; padding: 40px 20px; flex-direction: column; align-items: center; justify-content: center; text-align: center; overflow-y: auto; }
+        .active { display: flex; }
+        .container { max-width: 600px; width: 100%; padding-bottom: 120px; }
 
-        /* Hero Section */
-        .hero { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100vh; }
-        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 8vw, 5rem); margin-bottom: 15px; background: linear-gradient(to bottom, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-        .surprise-msg { font-style: italic; color: var(--primary-teal); font-size: 1.2rem; margin-top: 20px; }
+        /* Typography */
+        h1 { font-family: 'Playfair Display', serif; font-size: 2.8rem; margin-bottom: 20px; color: #fff; }
+        h2 { font-family: 'Playfair Display', serif; color: var(--accent-gold); margin-bottom: 15px; }
+        .surprise-msg { font-style: italic; color: var(--primary-teal); font-size: 1.1rem; border-left: 2px solid var(--primary-teal); padding-left: 15px; margin: 20px 0; }
 
-        /* Navigation Buttons */
-        .nav-box { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 1000; }
-        .btn { padding: 12px 30px; border-radius: 50px; border: 1px solid var(--glass-border); background: var(--glass); color: white; cursor: pointer; backdrop-filter: blur(10px); transition: 0.3s; font-weight: 600; }
-        .btn:hover { border-color: var(--primary-teal); background: rgba(45, 212, 191, 0.1); }
-
-        /* Surprise Interaction Box */
-        .tap-box { background: var(--glass); border: 1px dashed var(--accent-gold); padding: 40px; border-radius: 24px; text-align: center; cursor: pointer; margin-top: 40px; transition: 0.4s; }
-        .tap-box:hover { background: rgba(251, 191, 36, 0.05); }
-
-        /* Vertical Photo Gallery */
-        .vertical-gallery { display: flex; flex-direction: column; gap: 30px; margin-top: 50px; }
-        .photo-card { width: 100%; height: 500px; background: #111827; border-radius: 20px; overflow: hidden; border: 1px solid var(--glass-border); position: relative; }
-        .photo-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
-
-        /* Motivation Cards */
-        .roadmap-card { background: var(--glass); border: 1px solid var(--glass-border); padding: 30px; border-radius: 20px; margin-bottom: 25px; backdrop-filter: blur(10px); }
-        .year-num { color: var(--accent-gold); font-weight: 800; font-size: 1.5rem; margin-bottom: 10px; display: block; }
-
-        /* Secret Shield */
-        .shield-icon { font-size: 4rem; cursor: pointer; animation: pulse 2s infinite; display: inline-block; }
-        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); text-shadow: 0 0 20px var(--primary-teal); } 100% { transform: scale(1); } }
-
-        .reveal-msg { display: none; padding: 25px; background: rgba(255,255,255,0.02); border-left: 4px solid var(--primary-teal); margin-top: 20px; text-align: left; }
+        /* Interactive Elements */
+        .tap-reveal-btn { background: var(--glass); border: 1px solid var(--glass-border); padding: 20px; border-radius: 15px; cursor: pointer; margin: 15px 0; width: 100%; transition: 0.3s; text-align: left; position: relative; }
+        .tap-reveal-btn:hover { border-color: var(--primary-teal); background: rgba(255,255,255,0.05); }
+        .hidden-content { display: none; margin-top: 15px; }
         
-        .final-nurse-img { width: 100%; max-width: 400px; border-radius: 20px; border: 4px solid white; display: none; margin: 30px auto; }
+        .photo-frame { width: 100%; height: 350px; background: #111; border-radius: 15px; overflow: hidden; border: 1px solid var(--glass-border); }
+        .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
 
-        @media (max-width: 600px) { .photo-card { height: 350px; } }
+        /* Navigation */
+        .nav-bar { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 15px; z-index: 1000; }
+        .btn-nav { padding: 12px 30px; border-radius: 50px; border: 1px solid var(--glass-border); background: rgba(255,255,255,0.05); color: white; cursor: pointer; backdrop-filter: blur(15px); font-weight: 600; min-width: 100px; }
+        .btn-nav:hover { border-color: var(--primary-teal); color: var(--primary-teal); }
+
+        /* Mystery Boxes */
+        .secret-box { background: var(--glass); border: 2px dashed var(--primary-teal); padding: 30px; border-radius: 20px; margin: 10px 0; cursor: pointer; font-weight: 600; }
+
+        /* Final Surprise */
+        .final-reveal { width: 100%; max-width: 350px; border-radius: 20px; border: 5px solid white; box-shadow: 0 0 50px rgba(45, 212, 191, 0.4); display: none; margin-top: 20px; }
     </style>
 </head>
 <body>
@@ -69,124 +59,184 @@
     <div class="orb orb-1"></div>
     <div class="orb orb-2"></div>
 
-    <section class="section hero active" id="page1">
-        <div class="container" data-aos="fade-down">
-            <p style="letter-spacing: 5px; color: var(--accent-gold); font-weight: 600;">MRTECHNICIAN PRESENTS</p>
+    <div class="page active" id="p1">
+        <div class="container animate__animated animate__fadeIn">
+            <p style="letter-spacing: 4px; color: var(--accent-gold); font-size: 0.8rem; margin-bottom: 10px;">A DIGITAL SANCTUARY</p>
             <h1>Somika Bhandari</h1>
-            <div class="surprise-msg animate__animated animate__pulse animate__infinite">
-                "I have created a digital sanctuary for the girl closest to my soul."
+            <div class="surprise-msg">
+                "I have built this space specifically for you, because your journey is the most beautiful story I know."
             </div>
-            <p style="margin-top: 30px; opacity: 0.7;">You are not just a student; you are a future healer.</p>
+            <p style="opacity: 0.7; font-size: 0.9rem;">This is not just a website. It is my promise to you. Tap 'Next' to begin the journey.</p>
         </div>
-    </section>
+    </div>
 
-    <section class="section" id="page2">
+    <div class="page" id="p2">
         <div class="container">
-            <h2 style="text-align: center; font-family: 'Playfair Display'; font-size: 2.5rem;">The Foundation</h2>
+            <h2>The Foundation</h2>
+            <p style="margin-bottom: 20px; opacity: 0.8;">Your success is built on a mountain of sacrifice. Dedicate your wins to those who struggle for you.</p>
             
-            <div class="tap-box" onclick="revealGallery()">
-                <p style="font-size: 1.2rem; margin-bottom: 10px; color: var(--accent-gold);">Tap to see your mother's hard work...</p>
-                <p style="font-size: 0.9rem; opacity: 0.8;">"You deserve to be a successful nurse. Your mother's sacrifice is the light, and even though your father is away right now, your success will be the bridge that brings him back to a proud, united family."</p>
-            </div>
+            <p style="font-size: 0.85rem; color: var(--accent-gold); margin-bottom: 20px; font-style: italic;">
+                "Even if your father is away right now, your success can be the light that brings him home to a united, proud family."
+            </p>
 
-            <div class="vertical-gallery" id="momGallery" style="display:none;">
-                <div class="photo-card" data-aos="fade-up"><img src="1774193501517.jpg" alt="Mother's Hardwork 1"></div>
-                <div class="photo-card" data-aos="fade-up"><img src="1774193501517.jpg" alt="Mother's Hardwork 2"></div>
-                <div class="photo-card" data-aos="fade-up"><img src="mom3.jpg" alt="Mother's Hardwork 3"></div>
-                <div class="photo-card" data-aos="fade-up"><img src="mom4.jpg" alt="Mother's Hardwork 4"></div>
-                <div class="photo-card" data-aos="fade-up"><img src="mom5.jpg" alt="Mother's Hardwork 5"></div>
-                <div class="photo-card" data-aos="fade-up"><img src="1774193501517.jpg" alt="Mother's Hardwork 6"></div>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="page3">
-        <div class="container">
-            <h2 style="text-align:center; margin-bottom:40px;">Your 3-Year PCL Journey</h2>
-            
-            <div class="roadmap-card" data-aos="fade-right">
-                <span class="year-num">Year 01: The Discipline</span>
-                <p>This is where your dream takes root. Dhangadhi might feel new, but Navajeevan is your battleground. Focus on the basics, master the anatomy, and don't let temporary distractions take your eyes off the white coat. Your discipline today creates the life you want tomorrow.</p>
-            </div>
-
-            <div class="roadmap-card" data-aos="fade-left">
-                <span class="year-num">Year 02: The Strength</span>
-                <p>Clinical practice begins. You will see pain, but you will learn to heal. When the night shifts feel long and your body feels tired, remember your mother’s hands in Achham. Her strength flows through your veins. You are becoming the protector your family has always dreamed of.</p>
-            </div>
-
-            <div class="roadmap-card" data-aos="fade-right">
-                <span class="year-num">Year 03: The Victory</span>
-                <p>The finish line. This year is about the License and the promise you made to yourself. You are no longer just a student; you are a professional. Stay focused on the unity of your family. This is the year you prove that every struggle was worth it for this moment.</p>
-            </div>
-
-            <div class="roadmap-card" style="border-color: var(--primary-teal);" data-aos="zoom-in">
-                <span class="year-num" style="color: var(--primary-teal);">The Horizon: License & Beyond</span>
-                <p>After the hospital halls of Nepal, the world is waiting for you. Whether you stay or go abroad, you will be a world-class nurse. I see you crossing borders, bringing happiness to your parents, and making your name known globally. Your wings are ready to fly, Somika.</p>
-            </div>
-        </div>
-    </section>
-
-    <section class="section" id="page4">
-        <div class="container" style="text-align: center;">
-            <h2>The Protector's Secret</h2>
-            <div class="shield-icon" onclick="toggleSecret()">🛡️</div>
-            
-            <div id="secretBox" class="reveal-msg animate__animated animate__fadeIn">
-                <p><b>My Silent Guidance:</b> I support you because I want to see you as a successful woman rather than seeing you in the wrong direction or with someone who doesn't value your dreams. I am the shield that helps you stay on the right path.</p>
-            </div>
-
-            <div class="tap-box" style="margin-top: 50px;" onclick="toggleFeelings()">
-                <p style="color: var(--primary-teal);">Tap to see my heart...</p>
-                <div id="feelingsBox" style="display:none; margin-top: 20px; text-align: left;">
-                    <p>"Somika, if I have ever done anything wrong, I am truly sorry. Please never ever change the feeling for me like you have in the past. Do hard work always, and whenever you feel alone or distracted, come to me. I am always your safe place."</p>
-                    <button class="btn" style="margin-top:20px;" onclick="showNurse()">Tap for your Final Surprise</button>
+            <div class="tap-reveal-btn" onclick="reveal(this)">
+                <span>1. Tap to see her silent hard work...</span>
+                <div class="hidden-content animate__animated animate__zoomIn">
+                    <div class="photo-frame"><img src="mom1.jpg"></div>
                 </div>
             </div>
 
-            <img src="1774193501517.jpg" id="nursePhoto" class="final-nurse-img animate__animated animate__jackInTheBox" alt="Nurse Somika">
-        </div>
-    </section>
+            <div class="tap-reveal-btn" onclick="reveal(this)">
+                <span>2. Tap to see her sacrifice for you...</span>
+                <div class="hidden-content animate__animated animate__zoomIn">
+                    <div class="photo-frame"><img src="mom2.jpg"></div>
+                </div>
+            </div>
 
-    <div class="nav-box">
-        <button class="btn" onclick="prevPage()">Back</button>
-        <button class="btn" onclick="nextPage()">Next</button>
+            <div class="tap-reveal-btn" onclick="reveal(this)">
+                <span>3. Tap to see your strength...</span>
+                <div class="hidden-content animate__animated animate__zoomIn">
+                    <div class="photo-frame"><img src="mom3.jpg"></div>
+                </div>
+            </div>
+            
+            <p style="margin: 20px 0; font-size: 0.8rem; opacity: 0.5;">(Keep scrolling for more...)</p>
+            
+            <div class="tap-reveal-btn" onclick="reveal(this)">
+                <span>4. Tap to see the pillar of your life...</span>
+                <div class="hidden-content animate__animated animate__zoomIn">
+                    <div class="photo-frame"><img src="mom4.jpg"></div>
+                </div>
+            </div>
+
+            <div class="tap-reveal-btn" onclick="reveal(this)">
+                <span>5. Tap to see her hope in you...</span>
+                <div class="hidden-content animate__animated animate__zoomIn">
+                    <div class="photo-frame"><img src="mom5.jpg"></div>
+                </div>
+            </div>
+
+            <div class="tap-reveal-btn" onclick="reveal(this)">
+                <span>6. Tap to see her ultimate dedication...</span>
+                <div class="hidden-content animate__animated animate__zoomIn">
+                    <div class="photo-frame"><img src="mom6.jpg"></div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <div class="page" id="p3">
+        <div class="container">
+            <h2>The PCL Nursing Path</h2>
+            
+            <div class="tap-reveal-btn" onclick="reveal(this)">
+                <span style="color: var(--primary-teal); font-weight: 600;">Year 1: The Beginning</span>
+                <div class="hidden-content animate__animated animate__fadeIn">
+                    <p>This is where you plant the seed of your future. Navajeevan College is your new home. Stay focused on your books and ignore the distractions of Dhangadhi. This year, you are not just a student; you are a soldier for your mother’s dreams. Build your discipline now, and it will carry you through.</p>
+                </div>
+            </div>
+
+            <div class="tap-reveal-btn" onclick="reveal(this)">
+                <span style="color: var(--primary-teal); font-weight: 600;">Year 2: The Strength</span>
+                <div class="hidden-content animate__animated animate__fadeIn">
+                    <p>The hospital calls. You will touch lives and feel the weight of responsibility. When the clinical hours feel too long and your heart feels heavy, remember your mother’s hands in Achham. She is working harder there so you can heal people here. You are her greatest pride; never forget that strength.</p>
+                </div>
+            </div>
+
+            <div class="tap-reveal-btn" onclick="reveal(this)">
+                <span style="color: var(--primary-teal); font-weight: 600;">Year 3: The Victory</span>
+                <div class="hidden-content animate__animated animate__fadeIn">
+                    <p>The final lap. The white coat is within reach. This year is about unity—bringing your parents together through your success. Stay purely focused on your license exam. Your name as a Registered Nurse will be the greatest gift you can ever give to your mother and your future self.</p>
+                </div>
+            </div>
+
+            <div class="tap-reveal-btn" onclick="reveal(this)">
+                <span style="color: var(--accent-gold); font-weight: 600;">The Abroad Dream</span>
+                <div class="hidden-content animate__animated animate__fadeIn">
+                    <p>Once you have your license and experience, the world is yours. I see you crossing borders, working in world-class hospitals, and making your name famous internationally. Your nursing skills are your wings. Fly high, fly far, but always keep your family in your heart. You are destined for greatness.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="p4">
+        <div class="container">
+            <h2>My Love & Support</h2>
+            <p style="margin-bottom: 25px; opacity: 0.8;">I have hidden some secrets here just for you. Tap to unlock them.</p>
+            
+            <div class="secret-box" onclick="revealSecret(this, 'I support you because I want to see you as a successful woman rather than seeing you in the wrong direction or with someone who doesn\'t value your soul.')">
+                TAP TO SEE MY 'WHY'
+            </div>
+
+            <div class="secret-box" onclick="revealSecret(this, 'I am the shield that protects your dreams. Whenever the world gets loud, look here to find your focus again.')">
+                TAP TO SEE MY PROMISE
+            </div>
+
+            <div class="secret-box" onclick="revealSecret(this, 'My biggest dream is to see you wear that nursing uniform with a smile that says: I made my mother proud.')">
+                TAP TO SEE MY VISION
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="p5">
+        <div class="container">
+            <h2>A Message from My Heart</h2>
+            <div class="tap-reveal-btn" onclick="reveal(this)" style="border: 1px dashed var(--accent-gold); padding: 40px;">
+                <p style="text-align: center; color: var(--accent-gold);">Tap to open my deepest feelings...</p>
+                <div class="hidden-content animate__animated animate__fadeIn">
+                    <p style="text-align: left; line-height: 1.8;">
+                        Somika, if I have ever done anything wrong, I am truly sorry from the bottom of my soul. Please never ever change the feeling for me like you have in the past. 
+                        <br><br>
+                        Do hard work always. I want to be the one who sees you win. Whenever you feel alone or distracted, come to me anytime. I am always your safe place.
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="page" id="p6">
+        <div class="container">
+            <h1>Your Final Surprise</h1>
+            <button class="btn-nav" style="margin: 20px 0; background: var(--primary-teal); color: #000;" onclick="showFinal()">TAP FOR THE ICONIC VIEW</button>
+            <div id="finalImgContainer">
+                <img src="" id="finalNurse" class="final-reveal animate__animated animate__jackInTheBox" alt="Future Nurse Somika">
+                <p id="finalTxt" style="display:none; margin-top: 20px; font-weight: 600; color: var(--primary-teal);">The World-Class Nurse: Somika Bhandari</p>
+            </div>
+        </div>
+    </div>
+
+    <div class="nav-bar">
+        <button class="btn-nav" onclick="changePage(-1)">Back</button>
+        <button class="btn-nav" onclick="changePage(1)">Next</button>
+    </div>
+
     <script>
-        AOS.init({ duration: 1000, once: false });
+        let currentPage = 1;
+        const totalPages = 6;
 
-        let current = 1;
-        const total = 4;
-
-        function updatePages() {
-            document.querySelectorAll('.section').forEach((s, i) => {
-                s.classList.toggle('active', i + 1 === current);
-            });
-            window.scrollTo(0, 0);
-            AOS.refresh();
+        function changePage(dir) {
+            const next = currentPage + dir;
+            if (next >= 1 && next <= totalPages) {
+                document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+                document.getElementById('p' + next).classList.add('active');
+                currentPage = next;
+            }
         }
 
-        function nextPage() { if(current < total) { current++; updatePages(); } }
-        function prevPage() { if(current > 1) { current--; updatePages(); } }
-
-        function revealGallery() {
-            document.getElementById('momGallery').style.display = 'flex';
-            AOS.refresh();
+        function reveal(el) {
+            const content = el.querySelector('.hidden-content');
+            content.style.display = 'block';
         }
 
-        function toggleSecret() {
-            const box = document.getElementById('secretBox');
-            box.style.display = box.style.display === 'block' ? 'none' : 'block';
+        function revealSecret(el, text) {
+            el.innerHTML = `<span class="animate__animated animate__fadeIn">${text}</span>`;
+            el.style.borderStyle = 'solid';
+            el.style.background = 'rgba(45, 212, 191, 0.1)';
         }
 
-        function toggleFeelings() {
-            document.getElementById('feelingsBox').style.display = 'block';
-        }
-
-        function showNurse() {
-            document.getElementById('nursePhoto').style.display = 'block';
-            window.scrollTo(0, document.body.scrollHeight);
+        function showFinal() {
+            document.getElementById('finalNurse').style.display = 'block';
+            document.getElementById('finalTxt').style.display = 'block';
         }
     </script>
 </body>
@@ -197,4 +247,4 @@
 
 
 
-    
+            
