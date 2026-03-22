@@ -3,195 +3,190 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Somika's Path | Mrtechnician</title>
-    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>Somika's Journey | Mrtechnician</title>
+    
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+
     <style>
         :root {
-            --primary: #2dd4bf;
-            --gold: #fbbf24;
-            --bg: #020617;
+            --primary-teal: #2dd4bf;
+            --deep-bg: #030712;
+            --accent-gold: #fbbf24;
             --glass: rgba(255, 255, 255, 0.03);
+            --glass-border: rgba(255, 255, 255, 0.08);
+            --text-main: #f8fafc;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
-        body { font-family: 'Poppins', sans-serif; background: var(--bg); color: white; overflow: hidden; height: 100vh; }
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        body { background-color: var(--deep-bg); color: var(--text-main); font-family: 'Inter', sans-serif; overflow-x: hidden; line-height: 1.7; }
 
-        .page {
-            position: absolute;
-            width: 100%;
-            height: 100vh;
-            display: none;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            padding: 30px;
-            text-align: center;
-            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
-        }
-        .active { display: flex; }
+        .orb { position: fixed; border-radius: 50%; filter: blur(100px); z-index: -1; opacity: 0.2; }
+        .orb-1 { width: 500px; height: 500px; background: var(--primary-teal); top: -10%; left: -10%; }
+        .orb-2 { width: 600px; height: 600px; background: #4f46e5; bottom: -10%; right: -10%; }
 
-        h1 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 10px; }
-        .quote-main { font-style: italic; font-size: 1.1rem; color: #94a3b8; margin-bottom: 30px; line-height: 1.6; max-width: 500px; }
+        .section { min-height: 100vh; width: 100%; display: none; padding: 40px 20px; position: relative; }
+        .active { display: block; }
+        .container { max-width: 800px; margin: 0 auto; padding-bottom: 100px; }
 
-        /* Surprise Button Style */
-        .tap-btn {
-            background: rgba(45, 212, 191, 0.1);
-            border: 1px solid var(--primary);
-            color: var(--primary);
-            padding: 12px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: 600;
-            margin-bottom: 20px;
-            transition: 0.3s;
-        }
+        /* Hero Section */
+        .hero { display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; height: 100vh; }
+        .hero h1 { font-family: 'Playfair Display', serif; font-size: clamp(2.5rem, 8vw, 5rem); margin-bottom: 15px; background: linear-gradient(to bottom, #fff, #94a3b8); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .surprise-msg { font-style: italic; color: var(--primary-teal); font-size: 1.2rem; margin-top: 20px; }
 
-        /* The Secret Guidance Box */
-        .secret-shield {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            border: 2px solid var(--primary);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            cursor: pointer;
-            box-shadow: 0 0 20px rgba(45, 212, 191, 0.3);
-            margin: 20px auto;
-            animation: pulse 2s infinite;
-        }
+        /* Navigation Buttons */
+        .nav-box { position: fixed; bottom: 30px; left: 50%; transform: translateX(-50%); display: flex; gap: 20px; z-index: 1000; }
+        .btn { padding: 12px 30px; border-radius: 50px; border: 1px solid var(--glass-border); background: var(--glass); color: white; cursor: pointer; backdrop-filter: blur(10px); transition: 0.3s; font-weight: 600; }
+        .btn:hover { border-color: var(--primary-teal); background: rgba(45, 212, 191, 0.1); }
 
-        @keyframes pulse {
-            0% { transform: scale(1); box-shadow: 0 0 20px rgba(45, 212, 191, 0.3); }
-            50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(45, 212, 191, 0.6); }
-            100% { transform: scale(1); box-shadow: 0 0 20px rgba(45, 212, 191, 0.3); }
-        }
+        /* Surprise Interaction Box */
+        .tap-box { background: var(--glass); border: 1px dashed var(--accent-gold); padding: 40px; border-radius: 24px; text-align: center; cursor: pointer; margin-top: 40px; transition: 0.4s; }
+        .tap-box:hover { background: rgba(251, 191, 36, 0.05); }
 
-        .reveal-area {
-            display: none;
-            background: var(--glass);
-            border: 1px solid rgba(255,255,255,0.1);
-            padding: 20px;
-            border-radius: 20px;
-            backdrop-filter: blur(10px);
-            max-width: 450px;
-            margin-top: 15px;
-        }
+        /* Vertical Photo Gallery */
+        .vertical-gallery { display: flex; flex-direction: column; gap: 30px; margin-top: 50px; }
+        .photo-card { width: 100%; height: 500px; background: #111827; border-radius: 20px; overflow: hidden; border: 1px solid var(--glass-border); position: relative; }
+        .photo-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
 
-        /* Photo Grid */
-        .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
-        .photo-item { aspect-ratio: 1; background: #1e293b; border-radius: 8px; overflow: hidden; border: 1px solid var(--gold); }
-        .photo-item img { width: 100%; height: 100%; object-fit: cover; }
+        /* Motivation Cards */
+        .roadmap-card { background: var(--glass); border: 1px solid var(--glass-border); padding: 30px; border-radius: 20px; margin-bottom: 25px; backdrop-filter: blur(10px); }
+        .year-num { color: var(--accent-gold); font-weight: 800; font-size: 1.5rem; margin-bottom: 10px; display: block; }
 
-        /* Navigation */
-        .nav { position: absolute; bottom: 40px; display: flex; gap: 20px; }
-        .nav-btn {
-            background: transparent;
-            color: white;
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 8px 25px;
-            border-radius: 50px;
-            cursor: pointer;
-            font-size: 0.8rem;
-        }
+        /* Secret Shield */
+        .shield-icon { font-size: 4rem; cursor: pointer; animation: pulse 2s infinite; display: inline-block; }
+        @keyframes pulse { 0% { transform: scale(1); } 50% { transform: scale(1.1); text-shadow: 0 0 20px var(--primary-teal); } 100% { transform: scale(1); } }
 
-        /* Final Apology Area */
-        .apology-box {
-            border: 2px dashed var(--gold);
-            padding: 30px;
-            border-radius: 25px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
+        .reveal-msg { display: none; padding: 25px; background: rgba(255,255,255,0.02); border-left: 4px solid var(--primary-teal); margin-top: 20px; text-align: left; }
+        
+        .final-nurse-img { width: 100%; max-width: 400px; border-radius: 20px; border: 4px solid white; display: none; margin: 30px auto; }
+
+        @media (max-width: 600px) { .photo-card { height: 350px; } }
     </style>
 </head>
 <body>
 
-    <div class="page active animate__animated animate__fadeIn" id="p1">
-        <h1>For You, Somika</h1>
-        <p class="quote-main">"Your mother's hard work and sacrifice deserve your absolute success. You deserve to be a world-class nurse."</p>
-        
-        <button class="tap-btn" onclick="toggle('momPhotos')">Tap to see her hard work</button>
-        
-        <div id="momPhotos" class="reveal-area animate__animated animate__zoomIn">
-            <div class="photo-grid">
-                <div class="photo-item"><img src="1774193498905.jpg"></div>
-                <div class="photo-item"><img src="1774193498905.jpg"></div>
-                <div class="photo-item"><img src="1774193498905.jpg"></div>
-                <div class="photo-item"><img src="1774193498905.jpg"></div>
-                <div class="photo-item"><img src="1774193498905.jpg"></div>
-                <div class="photo-item"><img src="mom6.jpg"></div>
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+
+    <section class="section hero active" id="page1">
+        <div class="container" data-aos="fade-down">
+            <p style="letter-spacing: 5px; color: var(--accent-gold); font-weight: 600;">MRTECHNICIAN PRESENTS</p>
+            <h1>Somika Bhandari</h1>
+            <div class="surprise-msg animate__animated animate__pulse animate__infinite">
+                "I have created a digital sanctuary for the girl closest to my soul."
             </div>
+            <p style="margin-top: 30px; opacity: 0.7;">You are not just a student; you are a future healer.</p>
         </div>
+    </section>
 
-        <div class="nav">
-            <button class="nav-btn" style="opacity:0.3">Back</button>
-            <button class="nav-btn" onclick="go(2)">Next</button>
-        </div>
-    </div>
-
-    <div class="page animate__animated animate__fadeIn" id="p2">
-        <h1>Your 3-Year Nursing Path</h1>
-        <p class="quote-main">I have a secret guidance for your success.</p>
-        
-        <div class="secret-shield" onclick="toggle('guidanceContent')">🛡️</div>
-        
-        <div id="guidanceContent" class="reveal-area animate__animated animate__fadeIn">
-            <div style="text-align: left; font-size: 0.85rem;">
-                <p style="margin-bottom:10px;"><b style="color:var(--primary)">Year 1:</b> Focus on the foundation at Navajeevan. Don't let the new distractions of Dhangadhi lead you away.</p>
-                <p style="margin-bottom:10px;"><b style="color:var(--gold)">Year 2:</b> Clinicals will be hard. When you're tired, think of your mother's sacrifice in Achham. Stay strong.</p>
-                <p style="margin-bottom:15px;"><b style="color:#6366f1">Year 3:</b> The license is yours. This is the year you bring happiness and unity to your family.</p>
-                <hr style="opacity:0.1; margin-bottom:15px;">
-                <p style="font-style: italic; color: var(--primary);">"I support you because I want to see you as a successful woman, rather than seeing you fail or go in the wrong direction with the wrong person."</p>
-            </div>
-        </div>
-
-        <div class="nav">
-            <button class="nav-btn" onclick="go(1)">Back</button>
-            <button class="nav-btn" onclick="go(3)">Next</button>
-        </div>
-    </div>
-
-    <div class="page animate__animated animate__fadeIn" id="p3">
-        <h1>My Feelings</h1>
-        
-        <div class="apology-box" onclick="toggle('finalLetter')">
-            <span id="tapText">TAP TO REVEAL MY HEART</span>
+    <section class="section" id="page2">
+        <div class="container">
+            <h2 style="text-align: center; font-family: 'Playfair Display'; font-size: 2.5rem;">The Foundation</h2>
             
-            <div id="finalLetter" style="display:none;" class="animate__animated animate__fadeIn">
-                <p style="font-size: 0.95rem; line-height: 1.8;">
-                    "Somika, if I have ever done anything wrong, I am truly sorry. Please never ever change the feeling for me like you have in the past. 
-                    <br><br>
-                    Do hard work always. Whenever you feel alone, come to me anytime. I am always here to guide you."
-                </p>
-                <div style="margin-top:20px;">
-                    <button class="tap-btn" onclick="toggle('nurseImg')">See Your Future Self</button>
-                    <br>
-                    <img id="nurseImg" src="1774193498905.jpg" style="display:none; width:180px; border-radius:15px; border:2px solid white; margin-top:15px;" class="animate__animated animate__bounceIn">
+            <div class="tap-box" onclick="revealGallery()">
+                <p style="font-size: 1.2rem; margin-bottom: 10px; color: var(--accent-gold);">Tap to see your mother's hard work...</p>
+                <p style="font-size: 0.9rem; opacity: 0.8;">"You deserve to be a successful nurse. Your mother's sacrifice is the light, and even though your father is away right now, your success will be the bridge that brings him back to a proud, united family."</p>
+            </div>
+
+            <div class="vertical-gallery" id="momGallery" style="display:none;">
+                <div class="photo-card" data-aos="fade-up"><img src="mom1.jpg" alt="Mother's Hardwork 1"></div>
+                <div class="photo-card" data-aos="fade-up"><img src="mom2.jpg" alt="Mother's Hardwork 2"></div>
+                <div class="photo-card" data-aos="fade-up"><img src="mom3.jpg" alt="Mother's Hardwork 3"></div>
+                <div class="photo-card" data-aos="fade-up"><img src="mom4.jpg" alt="Mother's Hardwork 4"></div>
+                <div class="photo-card" data-aos="fade-up"><img src="mom5.jpg" alt="Mother's Hardwork 5"></div>
+                <div class="photo-card" data-aos="fade-up"><img src="mom6.jpg" alt="Mother's Hardwork 6"></div>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="page3">
+        <div class="container">
+            <h2 style="text-align:center; margin-bottom:40px;">Your 3-Year PCL Journey</h2>
+            
+            <div class="roadmap-card" data-aos="fade-right">
+                <span class="year-num">Year 01: The Discipline</span>
+                <p>This is where your dream takes root. Dhangadhi might feel new, but Navajeevan is your battleground. Focus on the basics, master the anatomy, and don't let temporary distractions take your eyes off the white coat. Your discipline today creates the life you want tomorrow.</p>
+            </div>
+
+            <div class="roadmap-card" data-aos="fade-left">
+                <span class="year-num">Year 02: The Strength</span>
+                <p>Clinical practice begins. You will see pain, but you will learn to heal. When the night shifts feel long and your body feels tired, remember your mother’s hands in Achham. Her strength flows through your veins. You are becoming the protector your family has always dreamed of.</p>
+            </div>
+
+            <div class="roadmap-card" data-aos="fade-right">
+                <span class="year-num">Year 03: The Victory</span>
+                <p>The finish line. This year is about the License and the promise you made to yourself. You are no longer just a student; you are a professional. Stay focused on the unity of your family. This is the year you prove that every struggle was worth it for this moment.</p>
+            </div>
+
+            <div class="roadmap-card" style="border-color: var(--primary-teal);" data-aos="zoom-in">
+                <span class="year-num" style="color: var(--primary-teal);">The Horizon: License & Beyond</span>
+                <p>After the hospital halls of Nepal, the world is waiting for you. Whether you stay or go abroad, you will be a world-class nurse. I see you crossing borders, bringing happiness to your parents, and making your name known globally. Your wings are ready to fly, Somika.</p>
+            </div>
+        </div>
+    </section>
+
+    <section class="section" id="page4">
+        <div class="container" style="text-align: center;">
+            <h2>The Protector's Secret</h2>
+            <div class="shield-icon" onclick="toggleSecret()">🛡️</div>
+            
+            <div id="secretBox" class="reveal-msg animate__animated animate__fadeIn">
+                <p><b>My Silent Guidance:</b> I support you because I want to see you as a successful woman rather than seeing you in the wrong direction or with someone who doesn't value your dreams. I am the shield that helps you stay on the right path.</p>
+            </div>
+
+            <div class="tap-box" style="margin-top: 50px;" onclick="toggleFeelings()">
+                <p style="color: var(--primary-teal);">Tap to see my heart...</p>
+                <div id="feelingsBox" style="display:none; margin-top: 20px; text-align: left;">
+                    <p>"Somika, if I have ever done anything wrong, I am truly sorry. Please never ever change the feeling for me like you have in the past. Do hard work always, and whenever you feel alone or distracted, come to me. I am always your safe place."</p>
+                    <button class="btn" style="margin-top:20px;" onclick="showNurse()">Tap for your Final Surprise</button>
                 </div>
             </div>
-        </div>
 
-        <div class="nav">
-            <button class="nav-btn" onclick="go(2)">Back</button>
-            <button class="nav-btn" onclick="location.reload()">Reset</button>
+            <img src="nurse_somika.jpg" id="nursePhoto" class="final-nurse-img animate__animated animate__jackInTheBox" alt="Nurse Somika">
         </div>
+    </section>
+
+    <div class="nav-box">
+        <button class="btn" onclick="prevPage()">Back</button>
+        <button class="btn" onclick="nextPage()">Next</button>
     </div>
 
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
     <script>
-        function go(num) {
-            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
-            document.getElementById('p' + num).classList.add('active');
-            // Hide reveals when changing page
-            document.querySelectorAll('.reveal-area').forEach(a => a.style.display = 'none');
+        AOS.init({ duration: 1000, once: false });
+
+        let current = 1;
+        const total = 4;
+
+        function updatePages() {
+            document.querySelectorAll('.section').forEach((s, i) => {
+                s.classList.toggle('active', i + 1 === current);
+            });
+            window.scrollTo(0, 0);
+            AOS.refresh();
         }
 
-        function toggle(id) {
-            const el = document.getElementById(id);
-            el.style.display = (el.style.display === 'block') ? 'none' : 'block';
-            if(id === 'finalLetter') document.getElementById('tapText').style.display = 'none';
+        function nextPage() { if(current < total) { current++; updatePages(); } }
+        function prevPage() { if(current > 1) { current--; updatePages(); } }
+
+        function revealGallery() {
+            document.getElementById('momGallery').style.display = 'flex';
+            AOS.refresh();
+        }
+
+        function toggleSecret() {
+            const box = document.getElementById('secretBox');
+            box.style.display = box.style.display === 'block' ? 'none' : 'block';
+        }
+
+        function toggleFeelings() {
+            document.getElementById('feelingsBox').style.display = 'block';
+        }
+
+        function showNurse() {
+            document.getElementById('nursePhoto').style.display = 'block';
+            window.scrollTo(0, document.body.scrollHeight);
         }
     </script>
 </body>
@@ -202,5 +197,4 @@
 
 
 
-
-                        
+    
