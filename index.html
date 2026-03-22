@@ -3,6 +3,211 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Somika's Path | Mrtechnician</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+    <style>
+        :root {
+            --primary: #2dd4bf;
+            --gold: #fbbf24;
+            --bg: #020617;
+            --glass: rgba(255, 255, 255, 0.03);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+        body { font-family: 'Poppins', sans-serif; background: var(--bg); color: white; overflow: hidden; height: 100vh; }
+
+        .page {
+            position: absolute;
+            width: 100%;
+            height: 100vh;
+            display: none;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            padding: 30px;
+            text-align: center;
+            background: radial-gradient(circle at center, #0f172a 0%, #020617 100%);
+        }
+        .active { display: flex; }
+
+        h1 { font-family: 'Playfair Display', serif; font-size: 2rem; color: var(--gold); margin-bottom: 10px; }
+        .quote-main { font-style: italic; font-size: 1.1rem; color: #94a3b8; margin-bottom: 30px; line-height: 1.6; max-width: 500px; }
+
+        /* Surprise Button Style */
+        .tap-btn {
+            background: rgba(45, 212, 191, 0.1);
+            border: 1px solid var(--primary);
+            color: var(--primary);
+            padding: 12px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            margin-bottom: 20px;
+            transition: 0.3s;
+        }
+
+        /* The Secret Guidance Box */
+        .secret-shield {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 2px solid var(--primary);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            cursor: pointer;
+            box-shadow: 0 0 20px rgba(45, 212, 191, 0.3);
+            margin: 20px auto;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); box-shadow: 0 0 20px rgba(45, 212, 191, 0.3); }
+            50% { transform: scale(1.05); box-shadow: 0 0 40px rgba(45, 212, 191, 0.6); }
+            100% { transform: scale(1); box-shadow: 0 0 20px rgba(45, 212, 191, 0.3); }
+        }
+
+        .reveal-area {
+            display: none;
+            background: var(--glass);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 20px;
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+            max-width: 450px;
+            margin-top: 15px;
+        }
+
+        /* Photo Grid */
+        .photo-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px; margin-top: 15px; }
+        .photo-item { aspect-ratio: 1; background: #1e293b; border-radius: 8px; overflow: hidden; border: 1px solid var(--gold); }
+        .photo-item img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* Navigation */
+        .nav { position: absolute; bottom: 40px; display: flex; gap: 20px; }
+        .nav-btn {
+            background: transparent;
+            color: white;
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 8px 25px;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+
+        /* Final Apology Area */
+        .apology-box {
+            border: 2px dashed var(--gold);
+            padding: 30px;
+            border-radius: 25px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="page active animate__animated animate__fadeIn" id="p1">
+        <h1>For You, Somika</h1>
+        <p class="quote-main">"Your mother's hard work and sacrifice deserve your absolute success. You deserve to be a world-class nurse."</p>
+        
+        <button class="tap-btn" onclick="toggle('momPhotos')">Tap to see her hard work</button>
+        
+        <div id="momPhotos" class="reveal-area animate__animated animate__zoomIn">
+            <div class="photo-grid">
+                <div class="photo-item"><img src="1774193498905.jpg"></div>
+                <div class="photo-item"><img src="1774193498905.jpg"></div>
+                <div class="photo-item"><img src="1774193498905.jpg"></div>
+                <div class="photo-item"><img src="1774193498905.jpg"></div>
+                <div class="photo-item"><img src="1774193498905.jpg"></div>
+                <div class="photo-item"><img src="mom6.jpg"></div>
+            </div>
+        </div>
+
+        <div class="nav">
+            <button class="nav-btn" style="opacity:0.3">Back</button>
+            <button class="nav-btn" onclick="go(2)">Next</button>
+        </div>
+    </div>
+
+    <div class="page animate__animated animate__fadeIn" id="p2">
+        <h1>Your 3-Year Nursing Path</h1>
+        <p class="quote-main">I have a secret guidance for your success.</p>
+        
+        <div class="secret-shield" onclick="toggle('guidanceContent')">🛡️</div>
+        
+        <div id="guidanceContent" class="reveal-area animate__animated animate__fadeIn">
+            <div style="text-align: left; font-size: 0.85rem;">
+                <p style="margin-bottom:10px;"><b style="color:var(--primary)">Year 1:</b> Focus on the foundation at Navajeevan. Don't let the new distractions of Dhangadhi lead you away.</p>
+                <p style="margin-bottom:10px;"><b style="color:var(--gold)">Year 2:</b> Clinicals will be hard. When you're tired, think of your mother's sacrifice in Achham. Stay strong.</p>
+                <p style="margin-bottom:15px;"><b style="color:#6366f1">Year 3:</b> The license is yours. This is the year you bring happiness and unity to your family.</p>
+                <hr style="opacity:0.1; margin-bottom:15px;">
+                <p style="font-style: italic; color: var(--primary);">"I support you because I want to see you as a successful woman, rather than seeing you fail or go in the wrong direction with the wrong person."</p>
+            </div>
+        </div>
+
+        <div class="nav">
+            <button class="nav-btn" onclick="go(1)">Back</button>
+            <button class="nav-btn" onclick="go(3)">Next</button>
+        </div>
+    </div>
+
+    <div class="page animate__animated animate__fadeIn" id="p3">
+        <h1>My Feelings</h1>
+        
+        <div class="apology-box" onclick="toggle('finalLetter')">
+            <span id="tapText">TAP TO REVEAL MY HEART</span>
+            
+            <div id="finalLetter" style="display:none;" class="animate__animated animate__fadeIn">
+                <p style="font-size: 0.95rem; line-height: 1.8;">
+                    "Somika, if I have ever done anything wrong, I am truly sorry. Please never ever change the feeling for me like you have in the past. 
+                    <br><br>
+                    Do hard work always. Whenever you feel alone, come to me anytime. I am always here to guide you."
+                </p>
+                <div style="margin-top:20px;">
+                    <button class="tap-btn" onclick="toggle('nurseImg')">See Your Future Self</button>
+                    <br>
+                    <img id="nurseImg" src="1774193498905.jpg" style="display:none; width:180px; border-radius:15px; border:2px solid white; margin-top:15px;" class="animate__animated animate__bounceIn">
+                </div>
+            </div>
+        </div>
+
+        <div class="nav">
+            <button class="nav-btn" onclick="go(2)">Back</button>
+            <button class="nav-btn" onclick="location.reload()">Reset</button>
+        </div>
+    </div>
+
+    <script>
+        function go(num) {
+            document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+            document.getElementById('p' + num).classList.add('active');
+            // Hide reveals when changing page
+            document.querySelectorAll('.reveal-area').forEach(a => a.style.display = 'none');
+        }
+
+        function toggle(id) {
+            const el = document.getElementById(id);
+            el.style.display = (el.style.display === 'block') ? 'none' : 'block';
+            if(id === 'finalLetter') document.getElementById('tapText').style.display = 'none';
+        }
+    </script>
+</body>
+</html>
+
+
+
+
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>For Somika | My Soul's Pride</title>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;1,400&family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
